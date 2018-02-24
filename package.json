@@ -1,0 +1,17 @@
+{
+  "name": "asciidocs-template",
+  "version": "1.0.0",
+  "description": ":lang: ja :doctype: book :toc: left",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "browser-sync": "^2.23.6",
+    "gulp": "^3.9.1",
+    "gulp-wait": "0.0.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

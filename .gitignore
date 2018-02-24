@@ -1,0 +1,9 @@
+/.bundle
+/.asciidoctor
+/node_modules
+/vendor/bundle
+!/vendor/bunle/.keep
+Gemfile.lock
+package-lock.json
+/docs/html
+!/docs/html/.keep

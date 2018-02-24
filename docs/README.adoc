@@ -1,0 +1,85 @@
+:lang: ja
+:doctype: book
+:toc: left
+
+= Startup Guide
+
+== Environment Recap
+
+You may need below environments to install this system.
+
+- OS: macOS
+- Browser: Chrome or some clew
+- JS Development: node + gulp + browser-sync
+- Text Editor: As you like
+
+
+== 1. Clone this repository
+
+```
+$ git clone ...
+$ cd ...
+```
+
+== 2. Installing gem
+
+```shell
+$ bundle install --path=vendor/bundle
+```
+
+== 3. Installing gulp and other npm modules
+
+```shell
+$ npm install
+```
+
+== 4. Run gulp file
+
+```shell
+$ gulp
+```
+
+== 5. Extra descriptions
+
+=== Generating PDF file
+
+```shell
+$ bundle exec asciidoctor-pdf -r asciidoctor-pdf-cjk -r asciidoctor-diagram README.adoc
+```
+
+
+=== Show PlantUML diagram
+
+[plantuml, User_login_sequence_diagram, png]
+----
+actor ユーザー as User
+user -> ログイン : ログインします！
+ログイン --> User:
+----
+
+hogepiyo
+
+////
+== Show mermaid diagram
+
+mermaid も直接書ける
+
+.mermaidの例
+[mermaid]
+....
+graph LR;
+    AsciiDocテキスト -- asciidocotor-pdf --> PDF仕様書;
+    PlantUMLテキスト -- PlantUML --> png画像;
+    png画像 -- asciidoctor-pdf --> PDF仕様書;
+....
+////
+
+
+=== Show source codes
+
+[source, java]
+----
+class Test {
+
+}
+----
