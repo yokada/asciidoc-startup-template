@@ -1,9 +1,8 @@
-/.bundle
 /.asciidoctor
 /node_modules
-/vendor/bundle
-!/vendor/bunle/.keep
+/vendor/*
+/vendor/bundle/*
 Gemfile.lock
 package-lock.json
-/docs/html
+/docs/html/*
 !/docs/html/.keep
