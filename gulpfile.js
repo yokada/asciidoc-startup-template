@@ -12,7 +12,7 @@ gulp.task('browser-sync', function() {
 });
 
 gulp.task('asciidoc', function(cb) {
-    return exec('bundle exec asciidoctor -D ./docs/html -r asciidoctor-diagram docs/*.adoc', function(err, stdout, stderr){
+    exec('bundle exec asciidoctor -D ./docs/html -r asciidoctor-diagram docs/*.adoc', function(err, stdout, stderr){
         console.log(stdout);
         console.log(stderr);
         cb(err);
@@ -25,7 +25,7 @@ gulp.task('reload', function () {
 
 gulp.task('default', ['asciidoc', 'browser-sync'], function(cb) {
     gulp.watch('./**/*.adoc').on('change', function(event){
-        return exec('bundle exec asciidoctor -D ./docs/html -r asciidoctor-diagram ' + event.path, function(err, stdout, stderr){
+        exec('bundle exec asciidoctor -D ./docs/html -r asciidoctor-diagram ' + event.path, function(err, stdout, stderr){
             console.log(stdout);
             console.log(stderr);
             cb(err);
