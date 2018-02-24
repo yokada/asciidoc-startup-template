@@ -24,6 +24,12 @@ gulp.task('reload', function () {
 });
 
 gulp.task('default', ['asciidoc', 'browser-sync'], function(cb) {
-    gulp.watch('./**/*.adoc', ['asciidoc']);
+    gulp.watch('./**/*.adoc').on('change', function(event){
+        return exec('bundle exec asciidoctor -D ./docs/html -r asciidoctor-diagram ' + event.path, function(err, stdout, stderr){
+            console.log(stdout);
+            console.log(stderr);
+            cb(err);
+        });
+    });
     gulp.watch('./**/*.html', ['reload']);
 });
