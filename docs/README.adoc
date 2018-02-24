@@ -12,11 +12,17 @@ You may need below environments to install this system.
 - Browser: Chrome or some clew
 - JS Development: node + gulp + browser-sync
 - Text Editor: As you like
+- Bundler, Graphviz
 
+== 0. Installing dependencies
+
+```shell
+$ brew install graphviz
+```
 
 == 1. Clone this repository
 
-```
+```shell
 $ git clone ...
 $ cd ...
 ```
