@@ -1,6 +1,6 @@
 var gulp = require('gulp'),
     bsync = require('browser-sync'),
-    exec = require('child_process').exec;
+    exec = require('child_process').exec; // TODO: Thought be "spawn" is a better way, rather than use "exec".
 
 gulp.task('browser-sync', function() {
     bsync({
