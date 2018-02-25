@@ -2,6 +2,14 @@ var gulp = require('gulp'),
     bsync = require('browser-sync'),
     exec = require('gulp-exec');
 
+var execReportOptions = {
+    err: true,
+    stderr: true,
+    stdout: true
+};
+
+var cmdAsciidocor = 'bundle exec asciidoctor -D ./docs/html -r asciidoctor-diagram <%= file.path %>';
+
 gulp.task('browser-sync', function() {
     bsync({
         server: {
@@ -12,38 +20,20 @@ gulp.task('browser-sync', function() {
 });
 
 gulp.task('asciidoc', function(cb) {
-    exec('bundle exec asciidoctor -D ./docs/html -r asciidoctor-diagram docs/*.adoc', function(err, stdout, stderr){
-        console.log(stdout);
-        console.log(stderr);
-        cb(err);
-    });
+    gulp.src('./**/*.adoc')
+        .pipe(exec(cmdAsciidocor))
+        .pipe(exec.reporter(execReportOptions));
 });
 
 gulp.task('reload', function () {
     bsync.reload();
 });
 
-var options = {
-    continueOnError: false,
-    pipeStdout: false
-};
-var reportOptions = {
-    err: true,
-    stderr: true,
-    stdout: true
-};
 gulp.task('default', ['browser-sync'], function() {
     gulp.watch('./**/*.adoc').on('change', function(event){
         gulp.src(event.path)
-            .pipe(exec('bundle exec asciidoctor -D ./docs/html -r asciidoctor-diagram <%= file.path %>'))
-            .pipe(exec.reporter(reportOptions));
-        /*
-        exec(, function(err, stdout, stderr){
-            console.log(stdout);
-            console.log(stderr);
-            cb(err);
-        });
-        */
+            .pipe(exec(cmdAsciidocor))
+            .pipe(exec.reporter(execReportOptions));
     });
     gulp.watch('./**/*.html', ['reload']);
 });
