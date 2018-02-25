@@ -1,6 +1,6 @@
 var gulp = require('gulp'),
     bsync = require('browser-sync'),
-    exec = require('child_process').exec; // TODO: Thought be "spawn" is a better way, rather than use "exec".
+    exec = require('gulp-exec');
 
 gulp.task('browser-sync', function() {
     bsync({
@@ -23,13 +23,27 @@ gulp.task('reload', function () {
     bsync.reload();
 });
 
-gulp.task('default', ['asciidoc', 'browser-sync'], function(cb) {
+var options = {
+    continueOnError: false,
+    pipeStdout: false
+};
+var reportOptions = {
+    err: true,
+    stderr: true,
+    stdout: true
+};
+gulp.task('default', ['browser-sync'], function() {
     gulp.watch('./**/*.adoc').on('change', function(event){
-        exec('bundle exec asciidoctor -D ./docs/html -r asciidoctor-diagram ' + event.path, function(err, stdout, stderr){
+        gulp.src(event.path)
+            .pipe(exec('bundle exec asciidoctor -D ./docs/html -r asciidoctor-diagram <%= file.path %>'))
+            .pipe(exec.reporter(reportOptions));
+        /*
+        exec(, function(err, stdout, stderr){
             console.log(stdout);
             console.log(stderr);
             cb(err);
         });
+        */
     });
     gulp.watch('./**/*.html', ['reload']);
 });
